@@ -22,10 +22,16 @@ class App extends Component {
   }
 
   render() {
+
+    let h_style = {
+      marginBottom: 5,
+      marginTop: 5,
+    };
+
     return (
       <div className="App">
-        <h3>Traveling Salesperson problem solved using brute force</h3>
-        <h4>Click on the area below to set the cities (max 8)</h4>
+        <h3 style={h_style}>Traveling Salesperson problem solved using brute force</h3>
+        <h4 style={h_style}>Click on the area below to set the cities (max 8)</h4>
         <Map points={this.state.points} addPoint={this.addPoint} result={this.state.result} />
         <br />
         <button onClick={this.calcRoute.bind(this)}>Calculate shortest route</button>
