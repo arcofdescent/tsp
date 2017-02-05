@@ -1,0 +1,13 @@
+
+.App {
+  text-align: center;
+}
+
+#map {
+  margin: 20px;
+  border: 1px solid #000;
+}
+
+.result {
+  margin-top: 20px;
+}
