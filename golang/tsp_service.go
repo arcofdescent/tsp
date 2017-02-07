@@ -9,13 +9,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	//"io"
 	"io/ioutil"
 	"math"
 	"net/http"
 	"sort"
 	"strconv"
-	//"strings"
+	"time"
 )
 
 type Distance struct {
@@ -31,8 +30,9 @@ type Point struct {
 }
 
 type Result struct {
-	Route  []string
-	Length string
+	Route    []string
+	Length   string
+	Duration string
 }
 
 func main() {
@@ -50,6 +50,7 @@ func main() {
 
 func calcRoute(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Got request")
+	startTime := time.Now()
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
@@ -68,7 +69,10 @@ func calcRoute(w http.ResponseWriter, r *http.Request) {
 	//fmt.Printf("distances: %#v\n", distances)
 
 	res := calcShortestRoute(len(points), distances)
+	duration := time.Since(startTime)
+	res.Duration = fmt.Sprintf("%v", duration)
 	fmt.Printf("res: %#v\n", res)
+	fmt.Printf("duration: %v\n", duration)
 	/*
 		res_json, err := json.Marshal(res)
 		if err != nil {

@@ -10,7 +10,8 @@ class Result extends Component {
     return(
       <div className="result">
         Shortest route: {route}<br/>
-        Distance travelled: {this.props.res.Length}
+        Distance travelled: {this.props.res.Length}<br/>
+				Calculation time: {this.props.res.Duration}
       </div>
     );
   }
