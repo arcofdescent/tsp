@@ -53,16 +53,8 @@ func calcRoute(w http.ResponseWriter, r *http.Request) {
 	res.Duration = fmt.Sprintf("%v", duration)
 	fmt.Printf("res: %#v\n", res)
 	fmt.Printf("duration: %v\n", duration)
-	/*
-		res_json, err := json.Marshal(res)
-		if err != nil {
-			fmt.Printf("Error while marshaling: %s\n", err)
-		}
-		fmt.Printf("res_json: %s\n", res_json)
-	*/
 
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(res)
-	//w.Write(res_json)
 }
