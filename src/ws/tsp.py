@@ -42,4 +42,44 @@ def calc_distance_between_points(points):
 
     return distances
 
+def calc_shortest_route(num_points, distances):
+
+        perms = itertools.permutations(range(num_points))
+        distance_ids = []
+        
+        for val in perms:
+            dst_ids = []
+            for v in val:
+                id = "P" + str(v+1)
+                dst_ids.append(id)
+                
+            dst_ids.append("P" + str(val[0]+1))
+            distance_ids.append(dst_ids)
+
+        shortest_route_length = 0
+        shortest_route = []
+
+        for route in distance_ids:
+            route_pairs = []
+            
+            for idx in range(len(route)-1):
+                sorted_pair = [route[idx], route[idx+1]]
+                sorted_pair.sort()
+                route_pairs.append(sorted_pair)
+
+            dst = get_route_length(route_pairs, distances)
+
+            if shortest_route_length == 0:
+                shortest_route_length = dst
+                shortest_route = route
+
+            if dst < shortest_route_length:
+                shortest_route_length = dst
+                shortest_route = route
+
+        #fmt.Printf("shortest_route: %v\n", shortest_route[:len(shortest_route)-1])
+        #fmt.Printf("shortest_route_length: %.2f\n", shortest_route_length)
+
+        #res := Result{Route: shortest_route[:len(shortest_route)-1], Length: fmt.Sprintf("%.2f", shortest_route_length)}
+        #return res
         
