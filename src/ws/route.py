@@ -8,5 +8,9 @@ points.append(tsp.Point('p3', 20, 35))
 
 distances = tsp.calc_distance_between_points(points)
 print(distances)
+print()
+
+tsp.calc_shortest_route(len(points), distances)
+
 
 

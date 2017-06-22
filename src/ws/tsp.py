@@ -56,6 +56,7 @@ def calc_shortest_route(num_points, distances):
             dst_ids.append("P" + str(val[0]+1))
             distance_ids.append(dst_ids)
 
+        print("distance_ids: %s" % distance_ids)
         shortest_route_length = 0
         shortest_route = []
 
@@ -67,7 +68,10 @@ def calc_shortest_route(num_points, distances):
                 sorted_pair.sort()
                 route_pairs.append(sorted_pair)
 
+            print("route: %s" % route)
+            print("route_pairs: %s" % route_pairs)
             dst = get_route_length(route_pairs, distances)
+            print("dst: %.2f" % dst)
 
             if shortest_route_length == 0:
                 shortest_route_length = dst
@@ -76,6 +80,8 @@ def calc_shortest_route(num_points, distances):
             if dst < shortest_route_length:
                 shortest_route_length = dst
                 shortest_route = route
+
+        print(shortest_route_length)
 
         #fmt.Printf("shortest_route: %v\n", shortest_route[:len(shortest_route)-1])
         #fmt.Printf("shortest_route_length: %.2f\n", shortest_route_length)
