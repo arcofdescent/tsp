@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import json
+import tsp
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -23,6 +25,25 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         
         return
 
+    def do_POST(self):
+
+        content_length = int(self.headers['Content-Length'])
+        post_data = self.rfile.read(content_length).decode('utf-8')
+
+        print("post_data: %s" % str(post_data))
+        points = json.loads(str(post_data))
+        print("points: %s" % points)
+        
+        distances = tsp.calc_distance_between_points(points)
+        print("distances: %s" % distances)
+
+        tsp.calc_shortest_route(len(points), distances)
+        
+        self.send_response(200)
+        self.wfile.write(bytes("thanks", "utf8"))
+
+        return
+    
 def run():
     print('starting server...')
 

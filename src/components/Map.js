@@ -22,7 +22,7 @@ class Map extends Component {
     let x = event.clientX - rect.left;
     let y = event.clientY - rect.top;
 
-    let newID = 'P' + (numPoints + 1).toString();
+    let newID = 'p' + (numPoints + 1).toString();
 
     this.props.addPoint({id: newID, x: x, y: y});
   }

@@ -62,7 +62,7 @@ class App extends Component {
   getRoute() {
     return new Promise((resolve, reject) => {
       request.post({ 
-          url: 'http://localhost:8000/calcRoute', 
+          url: 'http://localhost:8081/', 
           form: JSON.stringify(this.state.points),
         },
         function(err, response, body) {
