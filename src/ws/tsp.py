@@ -1,87 +1,37 @@
+#!/usr/bin/env python3
 
-import collections
-#from itertools import permutations, combinations
-import itertools
-import math
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
-Point = collections.namedtuple('Point', ['id', 'x', 'y'])
-Distance = collections.namedtuple('Distance', ['id1', 'id2', 'distance'])
+# HTTPRequestHandler class
+class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
-def get_distance(p1, p2, distances):
-    for d in distances:
-        if d.id1 == p1 and d.id2 == p2:
-            return d.distance
-
-    return 0
-
-def get_route_length(route_pairs, distances):
-    dst = 0
-    
-    for pair in route_pairs:
-        dst += get_distance(pair[0], pair[1], distances)
-
-    return dst
-
-def calc_distance_between_points(points):
-    distances = []
-
-    combs = itertools.combinations(range(len(points)), 2)
-    for c in combs:
-        id1 = points[c[0]].id
-        x1 = points[c[0]].x
-        y1 = points[c[0]].y
-
-        id2 = points[c[1]].id
-        x2 = points[c[1]].x
-        y2 = points[c[1]].y
-
-        dst = math.sqrt(pow((y2 - y1), 2) + pow((x2 - x1), 2))
-        distance = Distance(id1, id2, dst)
-
-        distances.append(distance)
-
-    return distances
-
-def calc_shortest_route(num_points, distances):
-
-        perms = itertools.permutations(range(num_points))
-        distance_ids = []
+    # GET
+    def do_GET(self):
         
-        for val in perms:
-            dst_ids = []
-            for v in val:
-                id = "p" + str(v+1)
-                dst_ids.append(id)
-                
-            dst_ids.append("P" + str(val[0]+1))
-            distance_ids.append(dst_ids)
+        # Send response status code
+        self.send_response(200)
 
-        shortest_route_length = 0
-        shortest_route = []
+        # Send headers
+        self.send_header('Content-type','text/html')
+        self.end_headers()
 
-        for route in distance_ids:
-            route_pairs = []
-            
-            for idx in range(len(route)-1):
-                sorted_pair = [route[idx], route[idx+1]]
-                sorted_pair.sort()
-                route_pairs.append(sorted_pair)
-
-            dst = get_route_length(route_pairs, distances)
-
-            if shortest_route_length == 0:
-                shortest_route_length = dst
-                shortest_route = route
-
-            if dst < shortest_route_length:
-                shortest_route_length = dst
-                shortest_route = route
-
-        print("shortest_route_length: %.2f" % shortest_route_length)
-
-        #fmt.Printf("shortest_route: %v\n", shortest_route[:len(shortest_route)-1])
-        #fmt.Printf("shortest_route_length: %.2f\n", shortest_route_length)
-
-        #res := Result{Route: shortest_route[:len(shortest_route)-1], Length: fmt.Sprintf("%.2f", shortest_route_length)}
-        #return res
+        # Send message back to client
+        message = "Hello world!"
         
+        # Write content as utf-8 data
+        self.wfile.write(bytes(message, "utf8"))
+        
+        return
+
+def run():
+    print('starting server...')
+
+    # Server settings
+    # Choose port 8080, for port 80, which is normally used for a http server, you need root access
+    server_address = ('127.0.0.1', 8081)
+    httpd = HTTPServer(server_address, testHTTPServer_RequestHandler)
+    print('running server...')
+    httpd.serve_forever()
+
+
+run()
