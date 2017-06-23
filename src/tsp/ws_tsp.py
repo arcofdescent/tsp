@@ -30,10 +30,12 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         content_length = int(self.headers['Content-Length'])
         post_data = self.rfile.read(content_length).decode('utf-8')
 
-        print("post_data: %s" % str(post_data))
-        points = json.loads(str(post_data))
-        print("points: %s" % points)
-        
+        print("post_data: %s" % post_data)
+        points = json.loads(post_data)
+
+        print("points: %s" % points['points'])
+
+        points = points['points']
         distances = tsp.calc_distance_between_points(points)
         print("distances: %s" % distances)
 
