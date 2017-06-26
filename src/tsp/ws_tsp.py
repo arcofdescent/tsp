@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
+import collections
 import json
 import tsp
+
+Point = collections.namedtuple('Point', ['id', 'x', 'y'])
 
 # HTTPRequestHandler class
 class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
@@ -35,7 +38,7 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
 
         print("points: %s" % points['points'])
 
-        points = points['points']
+        points = [Point(p['id'], p['x'], p['y']) for p in points['points']]
         distances = tsp.calc_distance_between_points(points)
         print("distances: %s" % distances)
 

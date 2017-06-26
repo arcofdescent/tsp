@@ -3,7 +3,6 @@ import collections
 import itertools
 import math
 
-Point = collections.namedtuple('Point', ['id', 'x', 'y'])
 Distance = collections.namedtuple('Distance', ['id1', 'id2', 'distance'])
 
 def get_distance(p1, p2, distances):
