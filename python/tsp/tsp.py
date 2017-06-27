@@ -78,6 +78,8 @@ def calc_shortest_route(num_points, distances):
 
         print("shortest_route_length: %.2f" % shortest_route_length)
 
+        return shortest_route_length
+
         #fmt.Printf("shortest_route: %v\n", shortest_route[:len(shortest_route)-1])
         #fmt.Printf("shortest_route_length: %.2f\n", shortest_route_length)
 

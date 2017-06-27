@@ -40,10 +40,14 @@ class testHTTPServer_RequestHandler(BaseHTTPRequestHandler):
         distances = tsp.calc_distance_between_points(points)
         print("distances: %s" % distances)
 
-        tsp.calc_shortest_route(len(points), distances)
+        shortest_route_length = tsp.calc_shortest_route(len(points), distances)
+
+        ret = { 'length': shortest_route_length }
+        ret_json = json.dumps(ret)
         
         self.send_response(200)
-        self.wfile.write(bytes("thanks", "utf8"))
+        #self.wfile.write(bytes("thanks", "utf8"))
+        self.wfile.write(bytes(ret_json, "utf8"))
 
         return
     
