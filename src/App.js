@@ -62,7 +62,7 @@ class App extends Component {
   getRoute() {
     return new Promise((resolve, reject) => {
       request.post({ 
-          url: 'http://localhost:8081/', 
+          url: 'http://localhost:5000/get_shortest_route', 
           form: JSON.stringify({points: this.state.points}),
         },
         function(err, response, body) {
