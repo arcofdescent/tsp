@@ -61,6 +61,7 @@ class App extends Component {
 
     getRoute() {
         return new Promise((resolve, reject) => {
+            /*
             request.post({
                 //method: 'POST',
                 //headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
@@ -76,7 +77,7 @@ class App extends Component {
                              resolve(body);
                          });
             
-                         /*
+            */
             let req = new Request('http://localhost:5000/get_shortest_route', {
                 method: 'POST',
                 body: JSON.stringify({points: this.state.points}),
@@ -86,7 +87,6 @@ class App extends Component {
                 .then(function(res) {
                     resolve(res);
                 });
-               */
         });
     }
 }
