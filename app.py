@@ -1,6 +1,6 @@
 
 import sys
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, jsonify
 from pprint import pprint
 import json
 
@@ -31,13 +31,9 @@ def get_shortest_route():
     distances = tsp.calc_distance_between_points(points)
     print("distances: %s" % distances)
 
-    shortest_route_length = tsp.calc_shortest_route(len(points), distances)
+    route_info = tsp.calc_shortest_route(len(points), distances)
 
-    ret = { 'length': shortest_route_length }
-    ret_json = json.dumps(ret)
-    pprint(ret_json)
-        
-    res = make_response("sdf")
+    res = make_response(json.dumps(route_info))
     res.headers['Access-Control-Allow-Origin'] = "*"
 
     return res

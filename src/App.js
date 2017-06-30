@@ -12,8 +12,8 @@ class App extends Component {
         this.state = {
             points: [],
             result: {
-                Route: [],
-                Length: 0,
+                route: [],
+                length: 0,
             },
         };
 
@@ -42,7 +42,7 @@ class App extends Component {
     }
 
     clearMap() {
-        this.setState({points: [], result: {Route: [], Length: 0}});
+        this.setState({points: [], result: {route: [], length: 0}});
     }
 
     addPoint(p) {
@@ -54,9 +54,8 @@ class App extends Component {
 
     async calcRoute() {
         let data = await this.getRoute();
-        let json = JSON.parse(data);
-        //console.log({json});
-        this.setState({result: json});
+        console.log({data});
+        this.setState({result: data});
     }
 
     getRoute() {
@@ -85,7 +84,7 @@ class App extends Component {
 
             fetch(req)
                 .then(function(res) {
-                    resolve(res);
+                    resolve(res.json());
                 });
         });
     }

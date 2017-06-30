@@ -48,15 +48,15 @@ class Map extends Component {
       stroke: "#000", 
     };
 
-    for (var j = 0; j < this.props.result.Route.length; j++) {
-      if (j === this.props.result.Route.length - 1) {
+    for (var j = 0; j < this.props.result.route.length; j++) {
+      if (j === this.props.result.route.length - 1) {
         break;
       }
 
-      let x1 =point_info[this.props.result.Route[j]].x;
-      let y1 =point_info[this.props.result.Route[j]].y;
-      let x2 =point_info[this.props.result.Route[j+1]].x;
-      let y2 =point_info[this.props.result.Route[j+1]].y;
+      let x1 =point_info[this.props.result.route[j]].x;
+      let y1 =point_info[this.props.result.route[j]].y;
+      let x2 =point_info[this.props.result.route[j+1]].x;
+      let y2 =point_info[this.props.result.route[j+1]].y;
 
       lines.push(
         <line key={j} x1={x1} y1={y1} x2={x2} y2={y2} style={line_style} />
