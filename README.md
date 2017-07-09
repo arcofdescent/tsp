@@ -13,6 +13,6 @@ The solution is implemented in Python as a web service. The frontend uses React.
   * Clone this repo
   * `$ cd tsp`
   * `$ npm install` (this takes some time)
-  * `$ FLASK_APP=app.py flask run
+  * `$ FLASK_APP=app.py flask run`
   * In another terminal - `$ npm run start` (this will open the app in your default browser)
 
