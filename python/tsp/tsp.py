@@ -78,6 +78,6 @@ def calc_shortest_route(num_points, distances):
 
         print("shortest_route_length: %.2f" % shortest_route_length)
 
-        res = { 'route': shortest_route[:len(shortest_route) - 1], 'length': shortest_route_length }
+        res = { 'route': shortest_route[:len(shortest_route) - 1], 'length': "%.2f" % shortest_route_length }
 
         return res

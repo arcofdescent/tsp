@@ -28,7 +28,7 @@ def get_shortest_route():
     start_time = time.time()
     distances = tsp.calc_distance_between_points(points)
     route_info = tsp.calc_shortest_route(len(points), distances)
-    route_info['duration'] = time.time() - start_time
+    route_info['duration'] = "%.4f" % (time.time() - start_time)
 
     res = make_response(json.dumps(route_info))
     res.headers['Access-Control-Allow-Origin'] = "*"
