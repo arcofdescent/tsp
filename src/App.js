@@ -15,6 +15,7 @@ class App extends Component {
                 route: [],
                 length: 0,
             },
+            fetching: false,
         };
 
         this.addPoint = this.addPoint.bind(this);
@@ -34,7 +35,8 @@ class App extends Component {
                 <h4 style={h_style}>Click on the area below to set the cities (max 8)</h4>
                 <Map points={this.state.points} addPoint={this.addPoint} result={this.state.result} />
                 <br />
-                <button onClick={this.calcRoute.bind(this)}>Calculate shortest route</button>
+                <button onClick={this.calcRoute.bind(this)}>
+                        { this.state.fetching ? 'Calculating' : 'Calculate shortest route' }</button>
                 <button onClick={this.clearMap}>Clear</button>
                 <Result res={this.state.result} />
                 </div>
@@ -42,7 +44,7 @@ class App extends Component {
     }
 
     clearMap() {
-        this.setState({points: [], result: {route: [], length: 0}});
+        this.setState({points: [], result: {route: [], length: 0}, fetching: false});
     }
 
     addPoint(p) {
@@ -53,9 +55,11 @@ class App extends Component {
     }
 
     async calcRoute() {
+        this.setState({ fetching: true });
         let data = await this.getRoute();
+        data.duration += ' seconds';
         console.log({data});
-        this.setState({result: data});
+        this.setState({result: data, fetching: false});
     }
 
     getRoute() {
